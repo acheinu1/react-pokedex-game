@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Pokedex from "./pokedex"
 class Pokegame extends Component {
     static defaultProps = {
         pokemon: [
@@ -14,10 +14,20 @@ class Pokegame extends Component {
         ]
     }
     render () {
-        let hand1 = []
-        let hand2 = [],
+        let hand1 = [];
+        let hand2 = [...this.props.pokemon];
+        while ( hand1.length < hand2.length ) {
+            let randIdx = Math.floor( Math.random() * hand2.length )
+            let randPoke = hand2.splice( randIdx, 1 )[0];
+            hand1.push( randPoke );
+        }
 
-        return ( <div></div> );
+        return (
+            <div>
+                <Pokedex pokemon={hand1} />
+                <Pokedex pokemon={hand2} />
+            </div>
+        );
     }
 }
 
